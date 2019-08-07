@@ -1,10 +1,21 @@
+require('dotenv').config();
+
 const express = require('express');
 const logger = require('morgan');
 const debug = require('debug')('app');
 const helmet = require('helmet');
 const chalk = require('chalk');
+const mongoose = require('mongoose');
 
 const userRouter = require('./routes/users.routes');
+
+mongoose.connect(
+  process.env.MONGODB_URI,
+  { useNewUrlParser: true, useCreateIndex: true },
+  (err, client) => {
+    debug('Database server started');
+  }
+);
 
 const app = express();
 
