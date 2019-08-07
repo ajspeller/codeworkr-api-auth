@@ -1,4 +1,20 @@
+require('dotenv').config();
+
+const JWT = require('jsonwebtoken');
+
 const User = require('../models/user.model');
+
+function signToken(user) {
+  return JWT.sign(
+    {
+      iss: 'ajspeller',
+      sub: user.id,
+      iat: new Date().getTime(),
+      exp: new Date().setDate(new Date().getDate() + 1)
+    },
+    process.env.JWT_SECRET
+  );
+}
 
 module.exports = {
   signUp: async (req, res, next) => {
@@ -17,8 +33,12 @@ module.exports = {
     });
 
     const user = await newUser.save();
-    res.status(200).json({
+
+    const token = signToken(user);
+
+    res.status(201).json({
       message: 'user created',
+      token,
       user
     });
   },
