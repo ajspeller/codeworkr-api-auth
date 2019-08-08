@@ -1,5 +1,3 @@
-require('dotenv').config();
-
 const express = require('express');
 const logger = require('morgan');
 const debug = require('debug')('app');
@@ -8,9 +6,10 @@ const chalk = require('chalk');
 const mongoose = require('mongoose');
 
 const userRouter = require('./routes/users.routes');
+const { PORT, MONGODB_URI } = require('./config');
 
 mongoose.connect(
-  process.env.MONGODB_URI,
+  MONGODB_URI,
   { useNewUrlParser: true, useCreateIndex: true },
   (err, client) => {
     debug('Database server started');
@@ -19,7 +18,7 @@ mongoose.connect(
 
 const app = express();
 
-app.set('PORT', process.env.PORT || 3001);
+app.set('PORT', PORT || 3001);
 
 app.use(helmet());
 app.use(logger('dev'));

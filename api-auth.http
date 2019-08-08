@@ -2,6 +2,7 @@
 
 GET http://localhost:3001/users/secret
 Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhanNwZWxsZXIiLCJzdWIiOiI1ZDRiN2NjMGI1M2RlNzFkY2NlNjExNGEiLCJpYXQiOjE1NjUyMjk5NzU3MzUsImV4cCI6MTU2NTMxNjM3NTczNX0.VKjXlR9xUqhzJ3SYdJf44hK1bWsPhHhRmmQ54jTY_FM
 
 ###
 
@@ -9,7 +10,7 @@ POST http://localhost:3001/users/signup
 Content-Type: application/json
 
 {
-  "email": "email@email.com",
+  "email": "email11@email.com",
   "password": "password"
 }
 
@@ -19,6 +20,6 @@ POST http://localhost:3001/users/signin
 Content-Type: application/json
 
 {
-  "email": "email",
-  "password": "email"
+  "email": "email11@email.com",
+  "password": "password"
 }

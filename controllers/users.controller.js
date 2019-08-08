@@ -1,8 +1,7 @@
-require('dotenv').config();
-
 const JWT = require('jsonwebtoken');
 
 const User = require('../models/user.model');
+const { JWT_SECRET } = require('../config');
 
 function signToken(user) {
   return JWT.sign(
@@ -12,7 +11,7 @@ function signToken(user) {
       iat: new Date().getTime(),
       exp: new Date().setDate(new Date().getDate() + 1)
     },
-    process.env.JWT_SECRET
+    JWT_SECRET
   );
 }
 
@@ -44,8 +43,10 @@ module.exports = {
   },
   signIn: async (req, res, next) => {
     // generate token
+    const token = signToken(req.user);
     res.status(200).json({
-      message: 'signIn'
+      message: 'signIn',
+      token
     });
   },
   secret: async (req, res, next) => {
